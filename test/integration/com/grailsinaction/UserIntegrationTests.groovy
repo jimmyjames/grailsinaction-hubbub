@@ -52,6 +52,17 @@ class UserIntegrationTests extends GroovyTestCase {
 		assertNull errors.getFieldError("userId")
 	}
 	
+	void testUserIdSameAsPassword() {
+		def user = new User(userId: 'someuserid', password: 'someuserid', homepage:'http://google.com')
+		assertFalse user.validate()
+		assertTrue user.hasErrors()
+		
+		def errors = user.errors
+		
+		assertEquals "validator.invalid", errors.getFieldError("password").code
+		assertEquals "someuserid", errors.getFieldError("password").rejectedValue
+	}
+	
 	def getTestUser() {
 		return new User(userId: 'joe', password: 'secret', homepage: 'http://grailsinaction.com')
 	}	
