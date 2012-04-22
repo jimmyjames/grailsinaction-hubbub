@@ -54,7 +54,5 @@ class UserIntegrationTests extends GroovyTestCase {
 	
 	def getTestUser() {
 		return new User(userId: 'joe', password: 'secret', homepage: 'http://grailsinaction.com')
-	}
-	
-	
+	}	
 }
