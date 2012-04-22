@@ -5,6 +5,7 @@ class User {
 	String password
 	String homepage
 	Date dateCreated
+	Profile profile
 	
 	static constraints = {
 		userId(size:3..20, unique:true)
@@ -13,6 +14,15 @@ class User {
 				return passwd != user.userId
 			}
 		)
+		dateCreated()
 		homepage(url:true,nullable:true)
+		profile(nullable:true)
 	}
+	
+	static mapping = {
+		profile lazy:false
+		posts sort:'dateCreated'
+	}
+	
+	static hasMany = [posts: Post, tags: Tag, following: User]
 }

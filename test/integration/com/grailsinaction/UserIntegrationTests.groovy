@@ -63,6 +63,21 @@ class UserIntegrationTests extends GroovyTestCase {
 		assertEquals "someuserid", errors.getFieldError("password").rejectedValue
 	}
 	
+	void testFollowing() {
+		def glen = new User(userId: 'glen', password:'password').save()
+		def peter = new User(userId: 'peter', password:'password').save()
+		def sven = new User(userId: 'sven', password: 'password').save()
+		
+		glen.addToFollowing(peter)
+		glen.addToFollowing(sven)
+		assertEquals "glen should be following two people", 2, glen.following.size()
+		
+		sven.addToFollowing(peter)
+		assertEquals "sven should be following one person", 1, sven.following.size()
+		
+		assertNull "peter should be following no people", peter.following
+	}
+	
 	def getTestUser() {
 		return new User(userId: 'joe', password: 'secret', homepage: 'http://grailsinaction.com')
 	}	
