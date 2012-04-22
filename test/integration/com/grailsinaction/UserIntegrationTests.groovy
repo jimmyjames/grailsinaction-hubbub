@@ -51,6 +51,7 @@ class UserIntegrationTests extends GroovyTestCase {
 		
 		assertNull errors.getFieldError("userId")
 	}
+	
 	def getTestUser() {
 		return new User(userId: 'joe', password: 'secret', homepage: 'http://grailsinaction.com')
 	}
