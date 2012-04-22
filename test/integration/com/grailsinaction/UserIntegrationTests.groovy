@@ -43,7 +43,7 @@ class UserIntegrationTests extends GroovyTestCase {
 		
 		def errors = user.errors
 		
-		assertEquals "size.tosmall", errors.getFieldError("password").code
+		assertEquals "size.toosmall", errors.getFieldError("password").code
 		assertEquals "tiny", errors.getFieldError("password").rejectedValue
 		
 		assertEquals "url.invalid", errors.getFieldError("homepage").code
